@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Edit Person #{{person.id}}</h1>
+  <form [formGroup]="editForm" (ngSubmit)="edit()">
+    <div class="form-group" [ngClass]="setClassUsername()">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="person.username" formControlName="username" placeholder="Choose a funny nickname" autofocus>
+    </div>
+    <div class="form-group" [ngClass]="setClassEmail()" >
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" [(ngModel)]="person.email" formControlName="email"  placeholder="Your email here">
+    </div>
+    <div class="form-group" [ngClass]="setClassPassword()">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" [(ngModel)]="person.password" formControlName="password"  placeholder="Min 6 characters">
+    </div>
+    <div class="form-group" [ngClass]="setClassAge()">
+      <label for="age">Age</label>
+      <input type="number" class="form-control" id="age" [(ngModel)]="person.age" formControlName="age"  placeholder="Your age">
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!editForm.valid">Submit</button>
+  </form>
+</div>
+
+

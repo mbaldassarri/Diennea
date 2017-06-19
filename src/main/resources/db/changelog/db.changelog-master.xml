@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="marco">
+        <createTable tableName="person">
+            <column name="id" type="INT"></column>
+            <column name="username" type="VARCHAR(255)"></column>
+            <column name="email" type="VARCHAR(255)"></column>
+            <column name="password" type="VARCHAR(255)"></column>
+            <column name="age" type="INT"></column>
+            <column name="version" type="INT"></column>
+        </createTable>
+
+        <sql endDelimiter=";">
+            insert into person(id,username,email,password,age, version) values(1,'username1','email1@gmail.com','password1', 20, 0);
+
+            insert into person(id,username,email,password,age, version) values(2,'username2','email2@gmail.com','password2', 30, 0);
+
+            insert into person(id,username,email,password,age, version) values(3,'username3','email3@gmail.com','password3', 40, 0);
+
+            insert into person(id,username,email,password,age, version) values(4,'username4','email4@gmail.com','password4', 50, 0);
+        </sql>
+
+        <addAutoIncrement catalogName="cat"
+                          columnDataType="int"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="100"
+                          tableName="person"/>
+    </changeSet>
+
+</databaseChangeLog>

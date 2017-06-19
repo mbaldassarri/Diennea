@@ -1,0 +1,74 @@
+<template [ngIf]="personPage != null">
+
+    <div id="top" class="row">
+        <div class="col-sm-3">
+            <h2>People</h2>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="input-group h2">
+                <input name="data[search]" class="form-control" id="search" type="text" placeholder="Search" #searchInput (keyup.enter)="search(searchInput.value)">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit" (click)="search(searchInput.value)"><span class="glyphicon glyphicon-search"></span></button>
+				</span>
+            </div>
+        </div>
+        <div class="col-sm-3">
+          <a (click)="goToAddPage()" class="btn btn-primary pull-right h2">New User</a>
+        </div>
+    </div>
+
+    <hr/>
+    <div id="list" class="row">
+
+        <div class="table-responsive col-md-12">
+            <table class="table table-striped" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th><app-table-sort [table]="self" [page]="personPage" [label]="'Username'" [property]="'username'" ></app-table-sort></th>
+                    <th><app-table-sort [table]="self" [page]="personPage" [label]="'Email'" [property]="'email'" ></app-table-sort></th>
+                    <th><app-table-sort [table]="self" [page]="personPage" [label]="'Age'" [property]="'age'" ></app-table-sort></th>
+                    <th class="actions">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor="let person of personPage.content">
+                    <td>{{person.username}}</td>
+                    <td>{{person.email}}</td>
+                    <td>{{person.age}}</td>
+                    <td class="actions">
+                        <a class="btn btn-success btn-xs" (click)="goToDetails(person)">Details</a>
+                        <a class="btn btn-warning btn-xs" (click)="goToEdit(person)">Edit</a>
+                        <a class="btn btn-danger btn-xs" (click)="currentPerson=person" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div> <!-- /#list -->
+
+    <app-table-pagination [table]="self" [page]="personPage"></app-table-pagination>
+
+    <!-- Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Delete person</h4>
+                </div>
+                <div class="modal-body">
+                    Do you want to remove this item ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="delete(currentPerson)" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
